@@ -10,20 +10,28 @@
  * }
  */
 public class Solution {
-    public boolean hasCycle(ListNode head) {
+    public ListNode detectCycle(ListNode head) {
         if(head==null || head.next==null)
-        return false;
-        ListNode temp=head,temp1=head;
+        return null;
         HashMap<ListNode,Integer> hm=new HashMap<>();
+        ListNode temp=head,temp1=head;
         while(temp1!=null && temp1.next!=null)
         {
-            
-            temp1=temp1.next.next;
             temp=temp.next;
+            temp1=temp1.next.next;
             if(temp==temp1)
-            return true;
+            {
+                temp=head;
+                while(temp!=temp1)
+                {
+                    temp=temp.next;
+                    temp1=temp1.next;
+                    if(temp==temp1)
+                    break;
+                }
+                return temp;
+            }
         }
-        return false;
-
+        return null;
     }
 }
