@@ -1,0 +1,43 @@
+class Solution {
+    public int sumSubarrayMins(int[] arr) {
+        int n=arr.length;
+        int nse[]=findnse(arr);
+        int pse[]=findpse(arr);
+        long total=0,mod=1000000007;
+        for(int i=0;i<n;i++)
+        {
+            int left=i-pse[i];
+            int right=nse[i]-i;
+            total+=(1L*right*left*arr[i]%mod)%mod;
+        }
+        return (int)(total%mod);
+    }
+    public int[] findnse(int[] arr)
+    {
+        int n=arr.length;
+        Stack<Integer> st=new Stack<>();
+        int nse[]=new int[n];
+        for(int i=n-1;i>=0;i--)
+        {
+            while(!st.isEmpty() && arr[st.peek()]>arr[i])
+            st.pop();
+            nse[i]=st.isEmpty()?n:st.peek();
+            st.push(i);
+        }
+        return nse;
+    }
+    public int[] findpse(int[] arr)
+    {
+        int n=arr.length;
+        Stack<Integer> st=new Stack<>();
+        int pse[]=new int[n];
+        for(int i=0;i<n;i++)
+        {
+            while(!st.isEmpty() && arr[st.peek()]>=arr[i])
+            st.pop();
+            pse[i]=st.isEmpty()?-1:st.peek();
+            st.push(i);
+        }
+        return pse;
+    }
+}
