@@ -1,0 +1,23 @@
+class Solution {
+    String[] mapping = {"","","abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"
+    };
+    public List<String> letterCombinations(String digits) {
+        List<String> ls=new ArrayList<>();
+        solve(0,digits,"",ls);
+        return ls;
+    }
+    public void solve(int i,String digits,String s,List<String> ls)
+    {
+        if(i==digits.length())
+        {
+            ls.add(s);
+            return;
+        }
+        int digit=digits.charAt(i)-'0';
+        String temp=mapping[digit];
+        for(char c: temp.toCharArray())
+        {
+            solve(i+1,digits,s+c,ls);
+        }
+    }
+}
