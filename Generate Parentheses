@@ -1,0 +1,23 @@
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> ls =new ArrayList<>();
+        solve("",0,0,n,ls);
+        return ls;
+    }
+    public void solve(String curr, int open, int closed, int total, List<String> ls)
+    {
+        if(curr.length()==2*total)
+        { 
+            ls.add(curr);
+            return;
+        }
+        if(open<total)
+        {
+            solve(curr+"(",open+1,closed,total,ls);
+        }
+        if(closed<open)
+        {
+            solve(curr+")",open,closed+1,total,ls);
+        }
+    }
+}
