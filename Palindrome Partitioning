@@ -1,0 +1,35 @@
+class Solution {
+    public List<List<String>> partition(String s) {
+        List<List<String>> ans =new ArrayList<>();
+        solve(0,s,new ArrayList<>(),ans);
+        return ans;
+    }
+    public void solve(int idx,String s,List<String> ls, List<List<String>> ans)
+    {
+        if(idx==s.length())
+        {
+            ans.add(new ArrayList<>(ls));
+            return;
+        }
+        for(int i=idx;i<s.length();i++)
+        {
+            if(ispalin(s,idx,i))
+            {
+                ls.add(s.substring(idx,i+1));
+                solve(i+1,s,ls,ans);
+                ls.remove(ls.size()-1);
+            }
+        }
+    }
+    public boolean ispalin(String s, int beg, int end)
+    {
+        while(beg<=end)
+        {
+            if(s.charAt(beg++)!=s.charAt(end--))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+}
