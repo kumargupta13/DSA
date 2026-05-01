@@ -1,0 +1,18 @@
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        int n=s.length();
+        int a1[]=new int[256];
+        int a2[]=new int[256];
+        for(int i=0;i<n;i++)
+        {
+            char ch=s.charAt(i);
+            char sh=t.charAt(i);
+            if(a1[ch]!=a2[sh])
+            return false;
+                a1[ch]=i+1;
+                a2[sh]=i+1;
+        
+        }
+        return true;
+    }
+}
