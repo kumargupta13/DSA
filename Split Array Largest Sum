@@ -1,0 +1,57 @@
+class Solution {
+    public int maxi(int[] arr)
+    {
+        int max=Integer.MIN_VALUE;
+        for(int i=0;i<arr.length;i++)
+        {
+            if(arr[i]>max)
+            max=arr[i];
+        }
+        return max;
+    }
+    public int sum(int[] arr)
+    {
+        int sum=0;
+        for(int i=0;i<arr.length;i++)
+        {
+            sum+=arr[i];
+        }
+        return sum;
+    }
+    public boolean find(int[] arr,int mid,int k)
+    {
+        int split=1,sum=0;
+        for(int i=0;i<arr.length;i++)
+        {
+            if(sum+arr[i]<=mid)
+            {
+                sum+=arr[i];
+            }
+            else
+            {
+                split++;
+                sum=arr[i];
+            }
+        }
+        if(split>k)
+        return false;
+        else
+        return true;
+    }
+    public int splitArray(int[] nums, int k) {
+        int n=nums.length;
+        int beg=maxi(nums),end=sum(nums),mid=0,ans=1;
+        while(beg<=end)
+        {
+            mid=beg+(end-beg)/2;
+            if(find(nums,mid,k))
+            {
+                ans=mid;
+                end=mid-1;
+            }
+            else
+            beg=mid+1;
+        }
+        return ans;
+    }
+}
