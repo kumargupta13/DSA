@@ -1,0 +1,40 @@
+class Solution {
+    int ans=0;
+    public boolean valid(String s)
+    {
+        int arr[]=new int[26];
+        for(int i=0;i<s.length();i++)
+        {
+            arr[s.charAt(i)-'a']++;
+        }
+        for(int i=0;i<26;i++)
+        {
+            if(arr[i]>1)
+            {
+                return false;
+            }
+        }
+        ans=Math.max(ans,s.length());
+        return true;
+    }
+    public void fun(List<String> arr, int i, int n, String s)
+    {
+        if(i==n)
+        {
+            return;
+        }
+        if(valid(s))
+        fun(arr,i+1,n,s);
+        s+=arr.get(i);
+        if(valid(s))
+        {  
+          fun(arr,i+1,n,s);
+        }
+        
+    }
+
+    public int maxLength(List<String> arr) {
+        fun(arr,0,arr.size(),"");
+        return ans;
+    }
+}
