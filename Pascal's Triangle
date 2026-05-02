@@ -1,0 +1,23 @@
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> ls=new ArrayList<>();
+        if(numRows==0)
+        return ls;
+        List<Integer> frow=new ArrayList<>();
+        frow.add(1);
+        ls.add(frow);
+        for(int i=1;i<numRows;i++)
+        {
+            List<Integer> prow=ls.get(i-1);
+            ArrayList<Integer> crow=new ArrayList<>();
+            crow.add(1);
+            for(int j=1;j<i;j++)
+            {
+                crow.add(prow.get(j-1)+prow.get(j));
+            }
+            crow.add(1);
+            ls.add(crow);
+        }
+        return ls;
+    }
+}
