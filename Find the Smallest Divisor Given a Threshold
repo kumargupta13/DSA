@@ -1,0 +1,49 @@
+class Solution {
+    public int maxi(int[] arr)
+    {
+        int max=0;;
+        for(int i=0;i<arr.length;i++)
+        {
+            if(arr[i]>max)
+            max=arr[i];
+        }
+        return max;
+    }
+    public int mini(int[] arr)
+    {
+        int min=Integer.MAX_VALUE;
+        for(int i=0;i<arr.length;i++)
+        {
+            if(arr[i]<min)
+            min=arr[i];
+        }
+        return min;
+    }
+    public int check(int[] arr, int x)
+    {
+        int sum=0;
+        for(int i=0;i<arr.length;i++)
+        {
+            sum+=Math.ceil((double)arr[i]/x);
+        }
+        return sum;
+    }
+    public int smallestDivisor(int[] nums, int threshold) {
+        int n=nums.length;
+        int beg=1,end=maxi(nums),mid=0,ans=1;
+        while(beg<=end)
+        {
+            mid=beg+(end-beg)/2;
+            if(check(nums,mid)<=threshold)
+            {
+                ans=mid;
+                end=mid-1;
+            }
+            else
+            {
+                beg=mid+1;
+            }
+        }
+        return ans;
+    }
+}
