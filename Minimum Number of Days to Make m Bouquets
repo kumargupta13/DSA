@@ -1,0 +1,62 @@
+class Solution {
+    public int maxi(int[] arr)
+    {
+        int max=0;;
+        for(int i=0;i<arr.length;i++)
+        {
+            if(arr[i]>max)
+            max=arr[i];
+        }
+        return max;
+    }
+    public int mini(int[] arr)
+    {
+        int min=Integer.MAX_VALUE;
+        for(int i=0;i<arr.length;i++)
+        {
+            if(arr[i]<min)
+            min=arr[i];
+        }
+        return min;
+    }
+    public boolean poss(int[] arr,int day, int m, int k)
+    {
+        int c=0,nob=0;
+        for(int i=0;i<arr.length;i++)
+        {
+            if(arr[i]<=day)
+            {
+                c++;
+            }
+            else {
+                nob+=(c/k);
+                c=0;
+            }
+        }
+            nob+=(c/k);
+        
+            if(nob>=m)
+            return true;
+            else 
+            return false;
+        
+    }
+    public int minDays(int[] bloomDay, int m, int k) {
+        int n=bloomDay.length;
+        int beg=mini(bloomDay),end=maxi(bloomDay),mid=0,ans=0;
+        if((long)m*k>n)
+        return -1;
+        while(beg<=end)
+        {
+            mid=beg+(end-beg)/2;
+            if(poss(bloomDay,mid,m,k)==true)
+            {
+                ans=mid;
+                end=mid-1;
+            }
+            else
+            beg=mid+1;
+        }
+        return ans;
+    }
+}
