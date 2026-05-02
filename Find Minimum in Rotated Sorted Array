@@ -1,0 +1,22 @@
+class Solution {
+    public int findMin(int[] nums) {
+        int n=nums.length;
+        int min=5999;
+        int beg=0,end=n-1,mid=0;
+        while(beg<=end)
+        {
+            mid=(beg+end)/2;
+            if(nums[beg]<=nums[mid])
+            {
+                min=Math.min(min,nums[beg]);
+                beg=mid+1;
+            }
+            else
+            {
+                min=Math.min(min,nums[mid]);
+                end=mid-1;
+            }
+        }
+        return min;
+    }
+}
